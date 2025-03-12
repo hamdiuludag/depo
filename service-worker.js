@@ -2,12 +2,12 @@ const CACHE_NAME = "1ad-blog-cache-v1";
 const urlsToCache = [
   "/",
   "/index.html",
-  "/css/style.css",
-  "/js/script.js",
-  "/images/logo.png"
+  "https://www.1ad.com.tr/css/style.css",
+  "https://www.1ad.com.tr/js/script.js",
+  "https://www.1ad.com.tr/images/logo.png"
 ];
 
-// Install service worker and cache files
+// Servis çalışanı kurulum ve önbelleğe alma
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -16,7 +16,7 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// Fetch data from network or cache
+// Ağdan veri alma ve önbellekten yükleme
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
@@ -25,7 +25,7 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
-// Clean up old caches
+// Eski önbellekleri temizleme
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
